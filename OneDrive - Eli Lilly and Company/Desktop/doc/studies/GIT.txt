@@ -1,0 +1,1359 @@
+
+
+GIT Basic to Advanced Course : - 
+
+Step 1:
+
+Course Introduction for GIT :- 
+
+Its a SCM (Source Code Management or Software Configuration MGMT) : - 
+
+e.g : 		We got the requirement from the customer as a developer what you do
+			Create a MVP (Minimum Value Product) which we not have any features.
+			Some new features are added. 
+			
+			Local Version Control Systems : 
+			Many people’s version-control method of choice is to copy files into another
+			directory (perhaps a time-stamped directory, if they’re clever). This approach is
+			very common because it is so simple.
+			
+			You have to handle the which version contains which features. You need add a notepad
+			file which contains all the features of that version.
+			
+			------------------>
+			
+			Centralized Version Control Systems:-
+			The next major issue that people encounter is that they need to collaborate
+			with developers on other systems. To deal with this problem, Centralized Version
+			Control Systems (CVCSs) were developed. These systems, such as CVS, Subversion,
+			and Perforce, have a single server that contains all the versioned files, and
+			a number of clients that check out files from that central place.
+		
+			Drawback:-
+			The most obvious is
+			the single point of failure that the centralized server represents. If that server
+			goes down for an hour, then during that hour nobody can collaborate at all or
+			save versioned changes to anything they’re working on. If the hard disk the central
+			database is on becomes corrupted, and proper backups haven’t been kept,
+			you lose absolutely everything—the entire history of the project except whatever
+			single snapshots people happen to have on their local machines.
+		
+			If you loose the connectivity we won't be able to communicate on CVCS we will  
+			not be able to work.
+			
+			------------------>
+			
+			In a DVCS
+			(such as Git, Mercurial, Bazaar or Darcs), clients don’t just check out the latest
+			snapshot of the files: they fully mirror the repository. Thus if any server dies,
+			and these systems were collaborating via it, any of the client repositories can be
+			copied back up to the server to restore it. Every checkout is really a full backup
+			of all the data.
+			
+			------------------>
+			
+Step 2: History about SCM :-
+
+			1972 : 			SCCS Source Code Control System (Free with UNIX)
+			
+			1982 : 			Revision Control System (RCS)
+			
+			Note: 			Both the version can be stored and handle the single file
+								not the set of files. One person on single file at given time.
+			
+			
+			1986-1990:	Concurrent Version System
+								Centralized repo concept come into picture and multiple user 
+								can work on single file at signle time.
+			
+			2000:	       Apache Sub-Version
+								Centralized repo starts working on multiple files.
+			
+			2000:    		BitKeeper 
+								Properitary distributed version system was available. But it was paid version
+			
+			------------------>
+			
+Step 3: Invention of GIT Repository:
+			
+			Give the example of Redhat Open source Project. 
+			where many kernel developers are working together to manage their product.
+			Linux Developer was using BitKeeper as Version Control System which is properietry
+				
+			Linus Torvalds come up with a solution called GIT in 2005 (Git is Distributed Version Control System)
+			GIT is developed in C 
+			
+			Just for Fun : man git on linux based machine : "the stupid content tracker"
+			
+			------------------>
+	
+Step 4: 
+			
+Who should use GIT :
+				
+			Anyone wanting to track edits.
+		
+			Developers and Programmers: 
+		
+			- HTML, CSS, JavaScript, PHP, Ruby
+			- Ruby on Rails, Perl, Python, ASP
+			- Java, C, C++, C#, Scala, Shell Script etc.	
+		
+			Not useful for tracking non-text files:
+			images, movies, music, fonts, PDFs, Spreadsheets
+		
+			------------------>
+
+			
+Step 5:
+				
+			Behaviour of GIT as per the function:
+		
+			Conceptually, most other systems store information as a list of file-based changes. 
+			These systems (CVS, Subversion, Perforce, Bazaar, and so on) think of the information 
+			they keep as a set of  files and the changes made to each file over time.
+		
+			Instead, Git thinks of its data
+			more like a set of snapshots of a mini filesystem. Every time you commit, or
+			save the state of your project in Git, it basically takes a picture of what all your
+			files look like at that moment and stores a reference to that snapshot. To be
+			efficient, if files have not changed, Git doesn’t store the file again—just a link to
+			the previous identical file it has already stored.
+		
+			Version control is a system that records changes to a file or set of files over time so that you can recall
+			specific versions later.
+		
+---------------------------------------------------------------------------------------->
+
+Installation of GIT:
+
+			Easy way to install git on CentOS with yum :-
+
+			sudo yum install git -y
+			
+			rpm -qa | grep git-*
+			
+			 git --version
+			 
+			 git help --all	
+--------------------------------------------------------------------------------------
+
+How to compile git from source on CentOS?
+
+			# sudo yum install autoconf libcurl-devel expat-devel gcc gettext-devel kernel-headers openssl-devel perl-devel zlib-devel -y
+
+			download the tar ball from following website:
+
+			https://mirrors.edge.kernel.org/pub/software/scm/git/
+		
+			or 
+		
+			wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.19.1.tar.gz
+
+			then : tar -xvf git-2.19.1.tar.gz
+
+			# sudo yum install openssl-devel -y
+
+			# cd git-v2.16.3
+
+			# make clean
+
+			# make configure
+
+			# ./configure CFLAGS='-I/usr/local/openssl/include' LDFLAGS='-L/usr/local/openssl/lib' --prefix=/usr/local/git --with-openssl=/usr/local/openssl
+
+			or 
+
+			# ./configure --prefix=/usr/local/git
+
+			# make
+
+			# make install 
+
+			Create file git.sh in this location:
+
+			sudo vi /etc/profile.d/git.sh
+
+			and paste there following contents:
+
+			pathmunge /usr/local/git/bin
+		
+			or  vi .bash_profile : PATH=$PATH:$HOME/bin:/usr/local/git/bin
+
+			How to update GIT to newer version?
+			When new version of GIT will be released, simply repeat the steps in this tutorial, 
+			but with newer version. You don't need to remove GIT that is currently installed. 
+			New build will override the one that you already have.
+
+
+			git --version : To show the vesrion of the GIT version on your machine.
+
+			# which git
+			
+			# git help --all	
+-------------------------------------------------------------------------
+
+			Reference Website: https://blacksaildivision.com/linux
+
+-------------------------------------------------------------------------
+
+			Installation of GIT on Windows:
+
+			Download GIT from below website:
+
+			https://git-scm.com/download/win
+
+			Download 64bit version and simply install it.
+
+			git --version		: To get the version of the GIT which you can use this command
+
+			git help --all		: To get the list of all the commands of the GIT
+
+----------------------------------------------------------------------------------------------------------------------------
+
+			First Time Configuration of the GIT: 
+
+			Configuration of git will be stored in 3 ways in GIT System Level Configuration, User Level Configuration, Project Level 
+
+			1) If we configure System Level Configuration then the file will be saved in : /etc/gitconfig (linux) in windows C:\Program Files\Git\etc
+
+			2) If we configure  User Level Configuration then the file will be saved in  : .gitconfig (Hidden File in users home directory)
+
+			3) If we configure Project Level Configuration then the file will be saved in  : my_project/.git/config
+
+			1) git config --system :	System Level Configuration use this command to save the configuration
+
+			2) git config --global :		User Level Configurtion use this command to save the configuration
+
+			3) git config :					Project Level Configurtion use this command to save the configuration
+
+			
+			Note: Minimum 2 configuration is mandatory while working on GIT user.name and user.email 
+			A name and an email address are associated with each commit.
+			It is really just a label and is convenient to see the name and the email of someone who made the commit.
+			
+            4) Worktree Git config scope
+			Note that the worktree scope is not available if you have not done a Git worktree add in your local project.
+			
+			5) Portable  Git config scope on a Windows machine
+			
+			$ git config --global user.name "Mangesh"
+
+			$ git config --global user.email mangesh@example.com
+
+			all the configuration will be saved inside the file "/root/test/.git"
+
+			$ git config --list 
+			
+			$ git config --list --show-origin : See to see where these configuration are coming from
+			
+			$ git config --global -l  : To see the global parameters
+			
+			$ git help -c   : To see all parameter which we can configure
+			
+									--------------------------------------------------------------------------------------------------------
+									
+									Demo 1:  User Specific Settings:-
+									
+									git config --global user.name "Mangesh"
+									
+									git config --global user.email mangesh@example.com
+									
+									more .gitconfig
+									
+									*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+									
+									Demo 2: Project Specific Settings:-
+									
+									git config  user.name "Mangesh"
+									
+									git config  user.email mangesh@example.com
+									
+									more /root/test123/.git/config
+												
+									*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+									Now that your identity is set up, you can configure the default text editor 
+									that will be used when Git needs you to type in a message.
+
+									$ git config --global core.editor vi                              : For Linux Users
+									$ git config --global core.editor "notepad.exe"           : For Windows Users
+									$ git config --global color.ui 
+
+									To find out  specific configuration information about parameter use the following command:
+
+									$ git config user.name
+
+									Another useful option you may want to configure is the default diff tool to
+									use to resolve merge conflicts.
+
+									$ git config --global merge.tool vimdiff
+
+									$ git mergetool --tool-help
+
+
+									## .gitconfig file is present in home directory which contain all the information 
+									about configuration which we have done with the above commands
+
+
+									How to reset the configuration parameters of the GIT: 
+
+									git config --global --unset core.excludesfile
+
+									or 
+
+									git config --global --edit
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+			GIT autocompletion is by default installed 
+
+			/root/Desktop/git-2.19.0/contrib/completion/git-completion.bash
+
+			mv /root/Desktop/git-2.19.0/contrib/completion/git-completion.bash .git-completion.bash
+
+			write the few line in .bashrc
+
+			vi .bashrc
+
+			source the file .git-completion.bash
+
+
+			Help Command in GIT:-
+
+			git help
+
+			git help log
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Initializing a repository:-
+
+Your telling the GIT to start tracking all the files. The command we are going to use is (git init)
+
+
+
+									*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+									Demo 1 :
+									
+									Create a directory myProject
+
+									$ mkdir myProject
+
+									Change to myProject Diretory
+
+									$ cd myProject
+
+									$ git init
+
+									This will create a folder named .git inside the current directory.  Which is hidden directory this directory is reffred as 
+									Local Repository.
+									
+									To Check the hidden directory you can use : ls -la Command to check the hidden directory
+									
+									Note: If you want to remove the git to tracked the files just remove .git folder it will stop tracking files
+
+---------------------------------------------------------------------------------------------------------------------------------------
+			GIT Directory Structure
+
+			objects/ folder
+			In this directory the data of your Git objects is stored – all the contents of the 
+			files you have ever checked in, your commits, trees and tag objects.
+
+			objects/pack folder
+			Files that store many object in compressed form, along with index files to allow 
+			them to be randomly accessed are found in this directory.
+
+			objects/info folder
+			Additional information about the object stored is placed in this directory.
+
+			refs folder
+			References are stored in subdirectories of this directory. 
+			The git prune command knows to preserve objects reachable from refs 
+			found in this directory and its subdirectories.
+
+
+			HEAD file
+			This file holds a reference to the branch you are currently on. 
+			This tells Git what to use as the parent of your next commit
+
+			config file
+			This is the main Git configuration file. It keeps specific Git options for your project, 
+			such as your remotes, push configurations, tracking branches and more. 
+			Your configuration will be loaded first from this file, then from a ~/.gitconfig file and then
+			from an /etc/gitconfig file, if they exist.
+
+			branches
+			A deprecated way to store shorthands to be used to specify a URL to git fetch, git pull and git push.
+			This mechanism is legacy and not likely to be found in modern repositories.
+
+			hooks folder
+			This directory contains shell scripts that are invoked after the corresponding Git commands. 
+			For example, after you run a commit, Git will try to execute the post-commit script.
+
+			index file
+			The GIT index is used as a staging area between your working directory and your repository. 
+			You can use the index to build up a set of changes that you want to commit together. When you create a commit, 
+			what is committed is what is currently in the index, not what is in your working directory. 
+			It is a binary file containing a sorted list of path names, each with permissions and the SHA-1 of a blob object.
+
+			info folder
+			Additional information about the repository is recorded in this directory.
+
+			logs folder
+			Stores the changes made to refs in repository.
+----------------------------------------------------------------------------------------------------------------------------
+
+			First Commit: 
+
+
+									*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+									Demo:
+									
+									Add any text file : by this is my first commit : touch name_of_the_file
+									
+									git status
+
+									git add .
+									
+									git status
+
+									git commit -m "New project.txt is added"
+									
+									This changes will be directly saved into local .git repository
+									
+									*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+									Basic Cycle of the GIT Commit thruout working on GIT
+									
+										1.  Make Changes into working directory.
+
+										2.  Add Changes into staging index
+			  
+										3.	 Commit the Changes (add it into repo)
+								
+								    *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+			  
+			  
+			Standard way to commit the messages:
+
+			1. Short signle-line summary (less than 50 characters)
+
+			2. Make sure complete description
+
+			3. Keep each line less than 72 characters
+
+			4. Write commit message in present tense not past tense.
+
+			5. Bullets points are asterick or hypen
+
+			6. Can add ticket tracking number from bugs or support requests. (JIRA)
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+			Viewing the Commit Messages:-
+			
+
+									*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+									
+									Demo:
+									
+									# git log 
+									
+									
+									commit 410732151b81e53f5b747e7679b112c8710b9c4d (HEAD -> master) ----------> Unique Commit ID
+									Author: root <mangesh@example.com> ---------------------
+									Date:   Sat Oct 20 20:39:44 2018 +0530                      |
+                                                                                                                        |
+                                                                                                                        |
+									Each commit do have unique identifier. Pull the information .gitconfig which we have
+									saved as per user level configuration.
+									
+									#  git log --oneline			: Showing the output in oneline
+																			   or git log --oneline --decorate
+									
+									# git log --stat					: Showing all the changes happened in that commit 
+									
+									# git log -p						: Showing one which lines changes are happened or not ----> To demonstrate this add some text into the file 
+									
+									# git log -p -1 : It will which line was changed in the last commit
+									# git log -p -2 : IT will show last 2 commit changes
+									
+									# git shortlog					: This command also help you show all the commit in shortlenght
+									
+									Filtering the Commit History:- 
+
+									# git log -n 1      or    # git log -3
+									
+									# git log --after="yesterday"
+									 
+									# git log --since=date -----------------------------> git log --since="Sat Oct 20 20:39:44 2018"
+
+									# git log --until=date -----------------------------> git log --until="Sat Oct 20 20:39:44 2018"
+
+									# git log --author="kevin" ------------------------> git log --author="mangesh"
+									
+									# git log --author="John\|Mary"
+									
+									# git log --after="2014-7-1" --before="2014-7-4"
+									
+									
+									Filtering by Message:
+									
+									# git log --grep="111" 
+									
+									# git log --grep="JRA-224:"
+									
+									
+									Filtering by File:
+									
+									git log -- project.txt
+									
+									
+									By Content:-
+									
+									git log -S "Line"
+
+									If you are trying to find out when and which lines was added into the file use followind command
+									
+									# git blame project.txt
+																		
+									git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+------------------------------------------------------------------------------
+
+			2 Tree Architecture ------------> Working-----------> Reposiroty
+
+			We used checkout the took the copy from repopsitory to working copy and commit from working copy to repository.
+			
+			This is shared repository if any other user has done the commit and if i don't have the recent checkout is done then
+			those changes will not coming into your wokring copy.
+  
+  
+			3 Tree architecture -----Working-----Staging Index-------Repository
+			
+			This is 3 way process happened in GIT,  Git will not directly do the commit it will first add the file 
+			into stage area with the help of git add command and after that if i fire git commit it will commit
+			only those files which was there in the stage area. It will give me flexibilty
+                        
+			1. From working to staging area we said git add 
+						
+			2. From stage  to repostiory we said git commit
+						
+			3. I can skip this stanging area and directly commit to repository.
+						
+						
+						
+			Git WorkFlow : ------------ Git the same example of the workflow
+
+
+					A 		Repository  ------ 1.txt 
+							
+							git commit
+							
+					A		Staging Area ------ 1.txt
+							
+							git add 
+							
+					A		Working Copy  ----- 1.txt
+					
+					
+					A B 		Repository  ------ 2.txt 
+							
+							git commit
+							
+					B		Staging Area ------ 2.txt
+							
+							git add 
+							
+					B		Working Copy  ----- 2.txt
+							
+
+------------------------------------------------------------------------------
+						
+			Hash Values: (SHA-1) 20 bytes
+
+             Git Generates a checksum for each change set.
+			 - Checksum algorithm convert the data into single number
+			 - same data always have same checksum number
+			 - Changing the data would change the checksum
+			 
+			Git uses SHA-1 algorithm to create a checksum
+			40 characters hexadecimal string
+			
+			We have seen this number when we see the git log command
+			
+			Each snapshot of git do have parent commit number -----Diagram
+			
+ --------------------------------------------------------------------------------------------------
+ 
+			HEAD Pointer:-
+
+			Git maintain a referenece variable called HEAD It a pointer to specific commit to the repository. 
+			If any new commitis happen the HEAD pointer will change. tip of the current branch of repository.
+			
+			
+			jdsjd00  -----------> dkdko00 ------------> kokook -------------> HEAD
+			
+			cd .git 
+
+			more HEAD 
+
+			cat /ref/head/master
+
+			git log
+
+			git log HEAD
+
+------------------------------------------------------------------------------------------------------------------------
+			Adding file into repository:-
+
+			git status ----Working----Staging----Repostiroy---different
+			
+			Working directory and Repository Matches
+
+			add file2 and file3
+			
+			touch file2 
+			
+			touch file 3
+
+			git status ---------------------------->untracked file
+
+			git add file2
+			
+			git add file2 file3
+			
+			git add .
+			
+			git add *.php
+			
+			git status
+
+			git commit -m "first file2 add"
+
+			git status 
+
+			git log
+
+--------------------------------------------------------------------------------------------------------------------
+
+			Editing the files:
+
+			Add some line into file1
+
+			git status
+
+			git add file1
+
+			git status 
+
+			git log
+--------------------------------------------------------------------------------------------------------------------
+
+			Viewing the changes :-
+			
+			$ git show Command:
+			
+			$ git show commit_id
+			
+			$ git show HEAD
+			
+			$ git show tag_ID
+			
+			$ git show --name-only HEAD
+			
+			
+			To see Blob Object:
+			
+			$ git ls-tree commit_id
+			
+			$ git show blob_id
+			
+			
+			To see inside the Branch and File:
+			
+			$ git show branch_name
+			
+			$ git show File_name
+			
+			$ git show name_branch File_name_from that Branch
+			
+						
+			$ git whatchanged
+			
+				
+			
+            Git Diff Command:
+			
+			# Edit file App.java ---- Add some line... 
+
+			# git status
+			
+			# git diff 
+
+			# git diff  ----- show all the changes between wokring and stage index
+			
+			# git diff name_of_the_file------staging index and working directory
+			
+	
+			Changes can be viewed between staging to repopsitory :
+			
+			# git add .
+			
+			# git diff --staged (staging directory and repository)
+
+			# git diff --cached ----It also do the same thing
+			
+			
+			Changed can be viewed between working dir to Repository:
+			# git diff head or git diff commit_id
+				
+			-------------------------------------------------------------------
+			
+			Git Diff Between 2 Different commit ID:
+			# git diff commit_id commit_id
+						
+			Git Diff between 2 different branches:
+			# git diff branch_name Branch_name
+
+            Git diff between 2 different tags:
+            # git tag
+            # git diff tag_ID tag_ID
+
+			Git diff between working directory and Remote directory:
+			# git diff origin1/master
+			
+			
+			
+----------------------------------------------------------------------------------------------------------------
+
+			delete the files:
+
+			add files file4
+			
+			git status
+
+			git commit 
+
+			delete the file with OS command 
+
+			git status
+						
+			git rm files4 -----Putting into the staging area
+
+			git status
+
+			git commit 
+
+			git log
+		
+			git rm file---another way----it will remove the file completely out
+			of the system.
+			
+			git status 
+
+			git commit
+----------------------------------------------------------------------------------------------------------------
+			move and rename the files:
+
+			change the file name OS command
+
+			git status 
+
+			git add new file 
+
+			git rm old file
+
+			git status --------------> Renamed will be deplayed
+
+			git commit 
+
+			git mv second.txt secondary.txt
+
+			git status
+
+			git mv to new directory
+
+---------------------------------------------------------------------------------------------------
+
+Download the project:
+
+git add .
+
+git status 
+
+git commit -m "intial commit"
+
+single command to stange to repo : git commit -am "changed 1"
+
+---------------------------------------------------------------------------------------------------
+            git checkout the command: (Undo the changes)
+				
+			
+			Undo the changes working:
+			
+			Delet the some lines into the file save 
+			
+			by mistake deleted:
+
+			git status 
+
+			git diff
+
+			We want the repository version back into the working directory
+			
+			" -- "   meaning stay on the same branch
+			
+			git checkout -- "file name or directory"
+			
+			git checkout 8b62898 -- sample.txt  (File Level)
+			
+			git checkout 9193513c5b1bc063b35b830101fe7cf0d9ecffca . 
+			
+			git checkout -b old-project-state 8b62898c
+
+---------------------------------------------------------------------------------------------------
+			unstage the file :
+
+			add something into staging area:
+			
+			touch sample.txt
+			
+			git add . 
+
+			git reset HEAD mytest.dat
+            git restore --staged mytest.dat
+---------------------------------------------------------------------------------------------------
+			undo commit in repostory: to edit the last commit
+			
+			Explain what will be issue when we edit the changes
+			
+			git commit 
+							
+			git commit --amend -m "This is repository"
+
+			--amend will work on last commit 
+						
+---------------------------------------------------------------------------------------------------
+
+			Retriving old version:
+			
+			git log
+			
+			Checkout the file which was old version
+			
+			git checkout 902b5813f511 -- "Filename"
+			
+			git status 
+			
+			it will put into the stage
+
+			You can do commit and save the file in working and repository
+---------------------
+			Optional: 
+			
+			git diff --staged
+
+			git reset HEAD t1
+
+			git checkout -- t1
+---------------------------------------------------------------------------------------------------
+
+			Revert command: It will revert the changes
+			
+			git log
+						
+			git revert 228916253ca94b4f1e56d5
+			
+			Keep the default message
+			
+			git log
+---------------------------------------------------------------------------------------------------
+conflict resolution marker
+
+
+			undo many commit move the head pointer
+			
+			git reset
+
+			soft :- doesn't not change working 
+
+			mixed :- Default .....change the stanged index will be changed
+
+			hard : dangourous
+
+
+			soft reset
+			
+			git log 
+			
+			copy all the commits into notepad file
+			
+			cat .git/refs/heads/master
+			
+			check the notepad file
+			
+			git reset --soft 0449f3fb0073515627253
+			
+			cat .git/refs/heads/master
+			
+			git log
+			
+			
+
+			mixed reset: 
+			
+			almost the same like soft reset only changes it will be working directory
+			
+			git reset --mixed 0449f3fb0073515627253
+
+			git reset --mixed 
+			
+
+
+
+			hard reset :
+			
+			
+			git reset --hard 
+
+			git log 
+			
+			git status 
+			
+			git reset --hard 
+
+---------------------------------------------------------------------------------------------------
+			Remove untracked file:
+			
+			create some junk files
+			
+			git status
+			
+						
+			git clean -n : only inform 
+
+			git clean -f : remove untracked file
+
+			if it is staging director it will not remove
+			
+			
+---------------------------------------------------------------------------------------------------
+			.gitignore files:
+					
+			
+			You can use basic regular expression:
+
+			* ? [aeoui] [0-9]
+
+			Negate expression by putting (!):
+
+			*.php
+			!index.php ----but don't ignore this file
+			
+			ignore all the files in the directory
+			assets/vedios/
+			
+			inside the project directory
+			
+			vi .gitignore
+			tempfile.txt
+			*.txt
+			
+			# sign is comment 
+						
+			Save the file
+			
+			ls -la
+			
+			git status
+			
+			you need to commit the file into repository
+			
+
+			
+			[root@jen_srv testrevert]# git status
+			On branch master
+			Untracked files:
+			(use "git add <file>..." to include in what will be committed)
+
+			.gitignore
+
+			what to ignore 
+			
+			1. compiled code
+			2. packeges and compressed file
+			3. log and databases
+			4. OS generated files
+			5. user-uploaded assests (images, PDF, Videos)
+			
+			https://help.github.com/articles/ignoring-files
+			https://github.com/github/gitignore
+			
+			
+			
+			-------------------------------------------->
+			
+			global ignore file :
+			
+			Go to user directory
+			
+			create the file first 
+
+			git config --global core.excludesfile ~/.gitignore_global
+
+---------------------------------------------------------------------------------------------------
+			ignore the tracked file:
+
+			create the file
+
+			git status 
+
+			git add . 
+
+			git commit -m "before ignore"
+
+			open the .gitignore add the file name
+
+			git status
+
+			changes something into file 
+
+			git status
+			
+			it will keep tracking, one way to remove the file
+			
+			git rm --cached file_name
+			
+			check the file is physcial present
+			
+			
+			GIT does not track empty directory:
+			
+			mkdir pdf
+			
+			ls -la pdf
+			
+			git status
+			
+			touch .gitkeep
+			
+			
+			
+---------------------------------------------------------------------------------------------------
+			tree-ish
+			
+			1. full SHA-1 hash
+			
+			2. short SHA-1 hash ---at least 8 characters
+			
+			3. HEAD Pointer
+			
+			4. ancentry
+			
+			git ls-tree HEAD
+			
+			git ls-tree master
+			
+			git ls-tree master^
+			
+			tree means directory 
+			
+			blob is a file
+			
+---------------------------------------------------------------------------------------------------			
+			git show command:
+			
+			git show commit_id
+			
+			How to compare commit :
+			
+			git log --online
+			
+			git diff "commit_id" ---current and that point of time
+			
+			git diff commit_id and file_name
+			
+			git giff commit_id..commit_id
+			
+			git --stat --summary 
+
+			
+			git diff-tree -r commit_d
+			
+		---------------------------------------------------------------------------------------------------
+
+
+			branching :
+
+			git branch 
+
+			git branch test_new_branch
+
+			git branch
+
+			ls -l .git/ref/heads
+
+			cat .git/ref/head/master
+
+			
+			switch the branch:
+
+			git checkout test_new_branch
+
+			git branch 
+
+			cat .git/HEAD
+
+			git log --oneline
+
+
+
+			create and switch the branch at the same time:
+			
+			Make sure from where you are creating the branch
+
+			git checkout -b name_of_the_branch
+
+              
+			git branch -v
+			last commit will be displayed
+			
+			git branch --merged
+			git branch --no-merged
+			
+			Branching Strategy
+           
+            Long Running Branches:
+            Master
+            Develop
+            PU            
+			
+			Topic Branches
+         	Pluglings
+            Short lived the branch
+            Bugfix
+             			
+			
+			Switching the branches with uncommitted changes:
+			
+			working directory should be clean in some cases if you add the new file into the branch it will 
+			switch the file no issues however if you edit the file and then try to commit the changes then 
+			it will throw the error
+			
+			commit
+			
+			stash it
+			
+			discard the changes
+			
+			git commit -am "new files changes"
+			
+			
+			Comparing the branches:
+			
+			git diff master..new_feature (tip of master and tip new feature)
+			
+			git diff --color-words master..new_feature
+			
+			git diff master..new_feature^
+			
+			git branch --merged
+			
+			
+			
+			Renaming the Branches:
+			
+			git branch
+			
+			git branch -m new_feature seo_title
+			
+			git branch
+			
+			
+			Deleting the branch:
+			
+			git branch branch_to_delete
+			
+			git branch -d branch_to_delete
+			
+			
+			demo2:
+			git branch branch_to_delete
+			
+			git checkout branch_to_delete
+			
+			git branch -d branch_to_delete
+			
+			you cannot delete the branch which you are one:
+			
+			
+			if you commited the changes then it will now ready to 
+			delete it.
+			
+			git branch -D branch_to_delete
+			
+			
+			
+			Merging the Branches:
+			
+			git merge test(name of the branch)
+			
+			git status 
+			
+			git log
+			
+			git diff  master..test (no diff will be detected in the branch)
+			
+			Clean working directory will be 
+			 git revert -m 1 <merge-commit-hash>
+			
+			
+			Merge Types:
+			
+			Fast forward merge ---
+			
+			git log test --online -3
+			
+			git merge --no-ff branch (don't do ff)
+			
+			True Merge:
+			
+			new commit id it generated
+			
+			
+			Merge Conflicts:
+			
+			if you the same changes done the merge 
+			conflict will happen
+			
+			git status 
+			
+			1. Abort the Merge
+			
+			2. Resolve the conflicts manually
+			
+			3. use merge tool
+			
+			1. git merge --abort
+			
+			2. Manually
+			
+			
+			Rebase:
+			
+			
+			
+			Stashing :
+			
+			git checkout test
+			
+			git stash save "changed"
+			
+			git stash show stash@{0}
+			
+			git stash show -p stash@{0}
+			
+			git stash list
+			
+			git stash pop stash@{0} : it will remove from stash
+			
+			git stash apply stash@{0}: it will keep the copy at stash
+			
+			git stash drop stash@{0}
+			
+			git stash list
+			
+			git stash clear
+			
+			----------------------------------------
+			
+			git cherry-pick ID
+			
+			
+			Remote repository:
+			
+			Push the commits to remote 
+			
+			origin/master will be created
+			
+			fetch the changes from remote 
+			
+			git remote 
+			
+			git remote add origin https://github.com/mangesh4558/mscirepository.git
+			
+			 git remote -v
+			 
+			 cat .git/config
+			 
+			 git remote rm origin
+			 
+			 git push -u origin master (-u does not track branch)
+			 
+			 cat .git/config
+			 
+			 ls -la .git/refs/remotes/origin
+			 
+			 git branch -r
+			 
+			 git branch -a
+			 
+			 
+			 Cloning repository:
+			 
+			 git clone paste the git path
+			 
+			 git clone url test_version
+			 
+			 
+			 Tracking remote branch:
+			 
+			 
+			Clone SVN Repository to GIT 
+			
+			git svn clone
+			
+			git rebase 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+			
+			
+			
+			
+
+----------------------------------------------
+
+
+
+==================================================================================================================
+
+
+
+
+
+
+
+			 
+
+
+
+
+
+
+
+
+
+

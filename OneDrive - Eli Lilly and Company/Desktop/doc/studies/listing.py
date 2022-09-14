@@ -1,0 +1,16 @@
+number=[2,3,4,5,6]
+num=[6,3,7,9]
+print(number)
+print(number[2])
+print(sorted(num))
+mystr=["vidya","priya"]
+print(mystr)
+print(len(mystr))
+num.append(11)
+print(num)
+num.insert(1,1000)
+print(num)
+num.pop()
+print(num)
+print(max(num))
+print(min(num))

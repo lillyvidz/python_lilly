@@ -1,0 +1,18 @@
+create table cust(cust_id int NOT NULL AUTO_INCREMENT,cust_name varchar(255),cust_city varchar(255),cust_phone int, PRIMARY KEY(cust_id));
+
+select p.p_id,c.cust_name, t.tech_id,t.tech_name, t.price,p.descr from cust c,tech t, pblm p where c.cust_id=p.cust_id and t.tech_id=p.tech_id;
+
+ update tech set price=20 where tech_id=2;
+
+select p.p_id,c.cust_name, t.tech_id,t.tech_name, t.price,p.descr from cust c,tech t, pblm p where c.cust_id=p.cust_id and t.tech_id=p.tech_id ORDER BY cust_name;
+
+select t.price,c.cust_name,t.price + 10 as "added" from cust c, tech t,pblm p where c.cust_id=p.cust_id and t.tech_id=p.tech_id;
+
+select count(city), city from salary group by city;
+
+select distinct City , gender, Count(gender) over (partition by city, gender order by city) from salary;
+
+select count(city), gender, city  from salary group by distinct(gender), distinct(city);
+
+
+

@@ -1,0 +1,98 @@
+ create table student (stud_id int , roll varchar (255),s_name varchar(255), city varchar(255),age int, dob date, PRIMARY KEY(roll));
+
+//while inserting data condition saying age must be >=18
+alter table student add check (age>=18);
+
+//Primary key checking
+SELECT TABLE_NAME, CONSTRAINT_TYPE, CONSTRAINT_NAME
+    FROM information_schema.table_constraints
+   WHERE table_name='student';
+
+	ntity'
+
+// to show index of pk
+show index from student;
+ SELECT DISTINCT
+      TABLE_NAME,
+        INDEX_NAME
+    FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE TABLE_SCHEMA = 'student';
+
+ALTER TABLE student ADD CONSTRAINT CHK_studentAge CHECK (Age>=18);
+
+//make unique key
+alter table student add phone int;
+alter table student add constraint myuni_key_const unique (phone);
+// not null value, making phone  number not null
+ alter table student modify phone int NOT NULL;
+
+//default constraint value - if i dont insert any city then by default add "bangalore"
+alter table student alter city set default 'bangalore';
+_________
+before
+________
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| stud_id | int(11)      | YES  |     | NULL    |       |
+| roll    | varchar(255) | NO   | PRI | NULL    |       |
+| s_name  | varchar(255) | YES  |     | NULL    |       |
+| city    | varchar(255) | YES  |     | NULL    |       |
+| age     | int(11)      | YES  |     | NULL    |       |
+| dob     | date         | YES  |     | NULL    |       |
+| phone   | int(11)      | NO   | UNI | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+
+after
++---------+--------------+------+-----+-----------+-------+
+| Field   | Type         | Null | Key | Default   | Extra |
++---------+--------------+------+-----+-----------+-------+
+| stud_id | int(11)      | YES  |     | NULL      |       |
+| roll    | varchar(255) | NO   | PRI | NULL      |       |
+| s_name  | varchar(255) | YES  |     | NULL      |       |
+| city    | varchar(255) | YES  |     | bangalore |       |
+| age     | int(11)      | YES  |     | NULL      |       |
+| dob     | date         | YES  |     | NULL      |       |
+| phone   | int(11)      | NO   | UNI | NULL      |       |
++---------+--------------+------+-----+-----------+-------+
+7 rows in set (0.038 sec
+
+// show index
+
+MariaDB [employee]> show index from student;
++---------+------------+-----------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+
+| Table   | Non_unique | Key_name        | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Ignored |
++---------+------------+-----------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+
+| student |          0 | PRIMARY         |            1 | roll        | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | NO      |
+| student |          0 | myuni_key_const |            1 | phone       | A         |           0 |     NULL | NULL   |      | BTREE      |         |               | NO      |
++---------+------------+-----------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+
+
+// while dropping table, drop all contraints
+// when all the constraint (not null, default, unique)have been defined in database1 and creating databse2 with same feilds , the databse2 carry not null constraint, default constraint.
+// drop unique constraint
+ alter table student drop index myuni_key_const;
+//drop check constraint
+ALTER TABLE student DROP CONSTRAINT CONSTRAINT_1;
+
+//drop default constraint
+alter table student alter city drop default;
+// drop pk
+alter table student drop primary key;
+
+
+
+________________________________________
+ALTER TABLE Persons ADD PRIMARY KEY (ID);
+______________________________________________________
+//single create statement with all constraints
+ create table student2 (stud_id int , roll varchar (255),s_name varchar(255), city varchar(255) Default 'bangalore',age int CHECK (age >= 18), phone int UNIQUE NOT NULL,dob date, PRIMARY KEY(roll));
+//foreign key
+create table icard (cno int, stud_id int,  foreign key (stud_id) references student(stud_id));
+//update
+update icard set cno=12 where stud_id=1;
+foreign key cannot be changed ie values
+//alias
+select s_name "name", roll "rollno" from student;
+//view - table cannot be modified, if we change the main parent table, it will affect the view table.
+ create view stud_data as select stud_id as id,roll as rollno,city as place from student;
+explain select * from persons3 where phone=113
